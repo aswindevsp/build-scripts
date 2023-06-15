@@ -3,12 +3,12 @@
 # Clone kernel
 export PWDIR=$(pwd)
 echo -e "$green << cloning kernel >> \n $white"
-git clone https://github.com/ElectroKernel/Kernel_Xiaomi_Sweet-ELECTRO 13
+git clone https://github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git 13
 cd 13
-git submodule init
-git submodule update
+# git submodule init
+# git submodule update
 
-git submodule update --recursive --remote
+# git submodule update --recursive --remote
 
 rm -rf ZIPOUT
 
@@ -17,9 +17,9 @@ rm -rf out
 git config --local user.name "dopaemon"
 git config --local user.email "polarisdp@gmail.com"
 
-git add -vAf
+# git add -vAf
 
-git commit -sm "KernelSU: Latest commit"
+# git commit -sm "KernelSU: Latest commit"
 
 export commit_sha=$(git rev-parse HEAD)
 
@@ -110,33 +110,33 @@ do
         1)
             git reset --hard ${commit_sha}
             echo "Miui Normal"
-            export zipname="ElectroKernel-Miui-Canary-sweet-${date}.zip"
-            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
+            export zipname="DoraCore-Miui-Canary-sweet-${date}.zip"
+#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
             start_build
             ;;
         2)
             git reset --hard ${commit_sha}
             echo "Miui Ksu"
-            export zipname="ElectroKernel-KernelSU-Miui-Canary-sweet-${date}.zip"
-            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
+            export zipname="DoraCore-KernelSU-Miui-Canary-sweet-${date}.zip"
+#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
             start_build
             ;;
         3)
             git reset --hard ${commit_sha}
             echo "OSS Normal"
-            export zipname="ElectroKernel-OSS-Canary-sweet-${date}.zip"
-            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
+            export zipname="DoraCore-OSS-Canary-sweet-${date}.zip"
+#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
+#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
             start_build
             ;;
         4)
             git reset --hard ${commit_sha}
             echo "OSS Ksu"
-            export zipname="ElectroKernel-KernelSU-OSS-Canary-sweet-${date}.zip"
-            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
+            export zipname="DoraCore-KernelSU-OSS-Canary-sweet-${date}.zip"
+#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
+#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
             start_build
             ;;
         *)
@@ -153,33 +153,33 @@ do
         1)
             git reset --hard ${commit_sha}
             echo "Miui Normal"
-            export zipname="ElectroKernel-Miui-Stable-sweet-${date}.zip"
-            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
+            export zipname="DoraCore-Miui-Stable-sweet-${date}.zip"
+#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
             start_build
             ;;
         2)
             git reset --hard ${commit_sha}
             echo "Miui Ksu"
-            export zipname="ElectroKernel-KernelSU-Miui-Stable-sweet-${date}.zip"
-            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
+            export zipname="DoraCore-KernelSU-Miui-Stable-sweet-${date}.zip"
+#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
             start_build
             ;;
         3)
             git reset --hard ${commit_sha}
             echo "OSS Normal"
-            export zipname="ElectroKernel-OSS-Stable-sweet-${date}.zip"
-            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
+            export zipname="DoraCore-OSS-Stable-sweet-${date}.zip"
+#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
+#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
             start_build
             ;;
         4)
             git reset --hard ${commit_sha}
             echo "OSS Ksu"
-            export zipname="ElectroKernel-KernelSU-OSS-Stable-sweet-${date}.zip"
-            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
+            export zipname="DoraCore-KernelSU-OSS-Stable-sweet-${date}.zip"
+#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
+#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
             start_build
             ;;
         *)
@@ -193,7 +193,7 @@ done
 canary_upload() {
 TOKEN="$TG_TOKEN"
 CHAT_ID="-1001980325626"
-MESSAGE="ElectroKernel Canary ${date}"
+MESSAGE="DoraCore Canary ${date}"
 DIRECTORY="$PWDIR/13/ZIPOUT"
 # Đường dẫn đến thư mục chứa các file zip
 FOLDER_PATH="$PWDIR/13/ZIPOUT"
@@ -215,7 +215,7 @@ curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendDocument" \
 stable_upload() {
 TOKEN="$TG_TOKEN"
 CHAT_ID="-1001980325626"
-MESSAGE="ElectroKernel Stable ${date}"
+MESSAGE="DoraCore Stable ${date}"
 DIRECTORY="$PWDIR/13/ZIPOUT"
 for file in "$DIRECTORY"/*.zip
 do

@@ -1,4 +1,4 @@
-# ElectroKernel Compilation Script
+# DoraCore Compilation Script
 Give the bash file permissions first: chmod +x run.sh
 
 Decide if you want to build Canary or Stable Builds: ./run.sh canary or ./run.sh stable
