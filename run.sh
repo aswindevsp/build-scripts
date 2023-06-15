@@ -3,7 +3,7 @@
 # Clone kernel
 export PWDIR=$(pwd)
 echo -e "$green << cloning kernel >> \n $white"
-git clone https://github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git 13
+git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git 13
 cd 13
 # git submodule init
 # git submodule update

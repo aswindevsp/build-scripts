@@ -4,7 +4,7 @@ on:
 
 jobs:
    build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: setting configurasi
@@ -20,19 +20,9 @@ jobs:
           binutils-aarch64-linux-gnu binutils-arm-linux-gnueabi \
           libghc-libyaml-dev libyaml-dev glibc-source sshpass
 
-    - name: Setup git Store Password
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-          git config --global credential.helper store
-          git config --global user.name "dopaemon"
-          git config --global user.email "polarisdp@gmail.com"
-          export FULL_TOKEN=${{ secrets.TOKEN_ONE }}${{ secrets.TOKEN_TWO }}${{ secrets.TOKEN_THREE }}
-          git clone https://${FULL_TOKEN}@github.com/X-UI-Unofficial/Store-Passwd.git
-
     - name: Canary Build
       env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
           bash run.sh canary
       shell: bash
