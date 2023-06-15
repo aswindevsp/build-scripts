@@ -27,7 +27,7 @@ echo -e "Latest commit is: "${commit_sha}
 
 sleep 5
 
-export KERNEL_DEFCONFIG=vendor/sweet_user_defconfig
+export KERNEL_DEFCONFIG=sweet-perf_defconfig
 export date=$(date +"%Y-%m-%d-%H%M")
 export ARCH=arm64
 export SUBARCH=arm64
