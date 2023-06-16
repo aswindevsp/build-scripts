@@ -115,30 +115,30 @@ do
 #            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
             start_build
             ;;
-        2)
-            git reset --hard ${commit_sha}
-            echo "Miui Ksu"
-            export zipname="DoraCore-KernelSU-Miui-Canary-sweet-${date}.zip"
+#        2)
+#            git reset --hard ${commit_sha}
+#            echo "Miui Ksu"
+#            export zipname="DoraCore-KernelSU-Miui-Canary-sweet-${date}.zip"
 #            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
 #            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-            start_build
-            ;;
-        3)
-            git reset --hard ${commit_sha}
-            echo "OSS Normal"
-            export zipname="DoraCore-OSS-Canary-sweet-${date}.zip"
+#            start_build
+#            ;;
+#        3)
+#            git reset --hard ${commit_sha}
+#            echo "OSS Normal"
+#            export zipname="DoraCore-OSS-Canary-sweet-${date}.zip"
 #            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
 #            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
-            start_build
-            ;;
-        4)
-            git reset --hard ${commit_sha}
-            echo "OSS Ksu"
-            export zipname="DoraCore-KernelSU-OSS-Canary-sweet-${date}.zip"
+#            start_build
+#            ;;
+#        4)
+#            git reset --hard ${commit_sha}
+#            echo "OSS Ksu"
+#            export zipname="DoraCore-KernelSU-OSS-Canary-sweet-${date}.zip"
 #            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
 #            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-            start_build
-            ;;
+#            start_build
+#            ;;
         *)
             echo "Error"
             ;;
@@ -146,51 +146,7 @@ do
 done
 }
 
-stable_build() {
-for ((i=1; i<=4; i++))
-do
-    case $i in
-        1)
-            git reset --hard ${commit_sha}
-            echo "Miui Normal"
-            export zipname="DoraCore-Miui-Stable-sweet-${date}.zip"
-#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
-            start_build
-            ;;
-        2)
-            git reset --hard ${commit_sha}
-            echo "Miui Ksu"
-            export zipname="DoraCore-KernelSU-Miui-Stable-sweet-${date}.zip"
-#            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-            start_build
-            ;;
-        3)
-            git reset --hard ${commit_sha}
-            echo "OSS Normal"
-            export zipname="DoraCore-OSS-Stable-sweet-${date}.zip"
-#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-#            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
-            start_build
-            ;;
-        4)
-            git reset --hard ${commit_sha}
-            echo "OSS Ksu"
-            export zipname="DoraCore-KernelSU-OSS-Stable-sweet-${date}.zip"
-#            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-#            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-            start_build
-            ;;
-        *)
-            echo "Error"
-            ;;
-    esac
-done
-
-}
-
-canary_upload() {
+tg_upload() {
 TOKEN="$TG_TOKEN"
 CHAT_ID="-1001980325626"
 MESSAGE="DoraCore Canary ${date}"
@@ -212,28 +168,5 @@ curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendDocument" \
   "${FILE_ARRAY[@]}"
 }
 
-stable_upload() {
-TOKEN="$TG_TOKEN"
-CHAT_ID="-1001980325626"
-MESSAGE="DoraCore Stable ${date}"
-DIRECTORY="$PWDIR/13/ZIPOUT"
-for file in "$DIRECTORY"/*.zip
-do
-    curl -F document=@"$file" \
-         -F chat_id="$CHAT_ID" \
-         -F caption="$MESSAGE" \
-         "https://api.telegram.org/bot$TOKEN/sendDocument"
-done
-}
-
-input=$1
-
-if [ "$input" == "canary" ]; then
-        canary_build
-        canary_upload
-elif [ "$input" == "stable" ]; then
-        stable_build
-        stable_upload
-else
-        echo "Error"
-fi
+build_kernel
+tg_upload

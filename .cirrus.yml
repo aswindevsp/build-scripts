@@ -14,4 +14,4 @@ task:
     memory: 6G
 
   build_script:
-    - bash run.sh canary
+    - bash run.sh
