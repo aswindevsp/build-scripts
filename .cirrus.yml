@@ -3,6 +3,7 @@ env:
     CIRRUS_WORKING_DIR: "/tmp/ci"
 
     GH_TOKEN: "ENCRYPTED[!59def97ae0387ce36715d7586f10330b2896b7f6ccffb8c59002756eb85085465ddc8e18f7758e66108354160073391c!]"
+    GH2_TOKEN: "ENCRYPTED[124fe8c79e35fc0260e146ca10306a6bf9f9c77c8388fbf5d5137aa569486a5bc8af8810b284235c5e61a629441d1abf]"
 
 task:
   name: Build DoraCore Kernel
@@ -12,6 +13,9 @@ task:
     image: dopaemon/doracore:latest
     cpu: 4
     memory: 6G
+
+  setup_script:
+    - sudo apt update && sudo apt install jq -y
 
   build_script:
     - bash run.sh
