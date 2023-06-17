@@ -138,7 +138,7 @@ generate_release_data() {
     cat <<EOF
 {
 "tag_name":"${BUILD_TIME}",
-"target_commitish":"android",
+"target_commitish":"main",
 "name":"${ZIPNAME}",
 "body":"${MSG}",
 "draft":false,
