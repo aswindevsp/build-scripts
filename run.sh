@@ -1,9 +1,6 @@
 #!/bin/bash
 #set -e
 
-git config --local user.name "dopaemon"
-git config --local user.email "polarisdp@gmail.com"
-
 # Export Vars
 export PWDIR=$(pwd)
 export KERNELDIR=$PWDIR/13
