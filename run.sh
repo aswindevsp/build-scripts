@@ -15,9 +15,9 @@ export BUILD_TYPE=canary
 export PRERELEASE=true
 echo "Build Type: Canary"
 if [ x${1} == xstable ]; then
-export BUILD_TYPE=stable
-export PPRERELEASE=false
-echo "Build Type: Stable"
+    export BUILD_TYPE=stable
+    export PPRERELEASE=false
+    echo "Build Type: Stable"
 fi
 
 # Clone kernel
@@ -55,7 +55,6 @@ echo -e "$green << cloning clang >> \n $white"
 git clone -b 15 --depth=1 https://gitlab.com/PixelOS-Devices/playgroundtc.git "$PWDIR"/clang
 export PATH="$PWDIR/clang/bin:$PATH"
 export KBUILD_COMPILER_STRING=$("$PWDIR"/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-
 
 # Speed up build process
 MAKE="./makeparallel"
@@ -105,7 +104,7 @@ start_build() {
 }
 
 build_kernel() {
-    for ((i = 1; i <= 2; i++)); do
+    for ((i = 1; i <= 1; i++)); do
         case $i in
             1)
                 git reset --hard ${commit_sha}
@@ -113,13 +112,13 @@ build_kernel() {
                 export ZIPNAME="DoraCore-OSS-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
                 start_build
                 ;;
-#            2)
-#                git reset --hard ${commit_sha}
-#                echo "MIUI"
-#                export ZIPNAME="DoraCore-MIUI-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
-#                git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-#                start_build
-#                ;;
+            2)
+                git reset --hard ${commit_sha}
+                echo "MIUI"
+                export ZIPNAME="DoraCore-MIUI-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
+                git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+                start_build
+                ;;
             *)
                 echo "Error"
                 ;;
@@ -128,7 +127,7 @@ build_kernel() {
 }
 
 generate_message() {
-MSG=$(sed 's/$/\\n/g' ${CURDIR}/changelog.md)
+    MSG=$(sed 's/$/\\n/g' ${CURDIR}/changelog.md)
 }
 
 generate_release_data() {
@@ -147,14 +146,13 @@ EOF
 
 create_release() {
     echo "Creating Release"
+    generate_message
     url=https://api.github.com/repos/DoraCore-Projects/build-scripts/releases
-    echo "$url"
     upload_url=$(curl -s \
         -H "Accept: application/vnd.github+json" \
         -H "Authorization: token ${GH_TOKEN}" \
         $url \
         -d "$(generate_release_data)" | jq -r .upload_url | cut -d { -f'1')
-    echo "$upload_url"
 }
 
 upload_release_file() {
