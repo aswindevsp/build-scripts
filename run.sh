@@ -108,7 +108,7 @@ start_build() {
 }
 
 build_kernel() {
-    for ((i = 1; i <= 4; i++)); do
+    for ((i = 1; i <= 2; i++)); do
         case $i in
             1)
                 git reset --hard ${commit_sha}
@@ -130,13 +130,17 @@ build_kernel() {
     done
 }
 
+generate_message() {
+MSG=$(sed 's/$/\\n/g' ${CURDIR}/changelog.md)
+}
+
 generate_release_data() {
     cat <<EOF
 {
 "tag_name":"${BUILD_TIME}",
 "target_commitish":"android",
 "name":"${ZIPNAME}",
-"body":"${ZIPNAME}",
+"body":"${MSG}",
 "draft":false,
 "prerelease":${PRERELEASE},
 "generate_release_notes":false
@@ -146,7 +150,7 @@ EOF
 
 create_release() {
     echo "Creating Release"
-    url=https://api.github.com/repos/DoraCore-Projects/android_kernel_xiaomi_sweet/releases
+    url=https://api.github.com/repos/DoraCore-Projects/build-scripts/releases
     echo "$url"
     upload_url=$(curl -s \
         -H "Accept: application/vnd.github+json" \
