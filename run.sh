@@ -14,6 +14,15 @@ export ARCH=arm64
 export SUBARCH=arm64
 export ZIPNAME=XYZABC
 
+export BUILD_TYPE=canary
+export PRERELEASE=true
+echo "Build Type: Canary"
+if [ x${1} == xstable ]; then
+export BUILD_TYPE=stable
+export PPRERELEASE=false
+echo "Build Type: Stable"
+fi
+
 # Clone kernel
 echo -e "$green << cloning kernel >> \n $white"
 git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git $KERNELDIR
@@ -103,36 +112,17 @@ build_kernel() {
         case $i in
             1)
                 git reset --hard ${commit_sha}
-                echo "Miui Normal"
-                export ZIPNAME="DoraCore-Miui-Canary-sweet-${BUILD_TIME}.zip"
-                #            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-                #            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
+                echo "Default - OSS"
+                export ZIPNAME="DoraCore-OSS-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
                 start_build
                 ;;
-                #        2)
-                #            git reset --hard ${commit_sha}
-                #            echo "Miui Ksu"
-                #            export ZIPNAME="DoraCore-KernelSU-Miui-Canary-sweet-${date}.zip"
-                #            git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
-                #            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-                #            start_build
-                #            ;;
-                #        3)
-                #            git reset --hard ${commit_sha}
-                #            echo "OSS Normal"
-                #            export ZIPNAME="DoraCore-OSS-Canary-sweet-${date}.zip"
-                #            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-                #            git cherry-pick 0ac291bba8a6f8a57c581bab651f78a95f460e19
-                #            start_build
-                #            ;;
-                #        4)
-                #            git reset --hard ${commit_sha}
-                #            echo "OSS Ksu"
-                #            export ZIPNAME="DoraCore-KernelSU-OSS-Canary-sweet-${date}.zip"
-                #            git cherry-pick dc8508f83153ed010903ff359617a45010985ac7
-                #            git cherry-pick b609eaa139b4a7a9e97191351da39ba9bfaf73ea
-                #            start_build
-                #            ;;
+#            2)
+#                git reset --hard ${commit_sha}
+#                echo "MIUI"
+#                export ZIPNAME="DoraCore-MIUI-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
+#                git cherry-pick bbb51e5f51f597e577b00121652f68ea8e656859
+#                start_build
+#                ;;
             *)
                 echo "Error"
                 ;;
@@ -148,7 +138,7 @@ generate_release_data() {
 "name":"${ZIPNAME}",
 "body":"${ZIPNAME}",
 "draft":false,
-"prerelease":false,
+"prerelease":${PRERELEASE},
 "generate_release_notes":false
 }
 EOF
