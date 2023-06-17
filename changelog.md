@@ -1,5 +1,5 @@
 **DoraCore Kernel**
 
 **Changelog:**
-•Hello
-•World
+Hello
+World
