@@ -1,13 +1,14 @@
 env:
     CIRRUS_CLONE_DEPTH: 1
-    CIRRUS_WORKING_DIR: "/tmp/ci"
+    CIRRUS_WORKING_DIR: "/home/DoraCore"
 
     GH_TOKEN: "ENCRYPTED[!59def97ae0387ce36715d7586f10330b2896b7f6ccffb8c59002756eb85085465ddc8e18f7758e66108354160073391c!]"
 
 task:
   name: Build DoraCore Kernel
   timeout_in: 2h
-  only_if: $CIRRUS_REPO_OWNER == 'DoraCore-Projects'
+  only_if: $CIRRUS_REPO_OWNER == 'DoraCore-Projects' && $CIRRUS_BRANCH == 'main'
+  skip: $CIRRUS_BRANCH != 'main'
   container:
     image: dopaemon/doracore:latest
     cpu: 4
