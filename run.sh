@@ -127,7 +127,7 @@ build_kernel() {
 }
 
 generate_message() {
-    MSG=$(sed 's/$/\\n/g' ${CURDIR}/changelog.md)
+    MSG=$(sed 's/$/\\n/g' $PWDIR/changelog.md)
 }
 
 generate_release_data() {
