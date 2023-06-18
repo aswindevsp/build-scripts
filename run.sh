@@ -45,7 +45,7 @@ sleep 5
 mkdir -p $PWDIR/ZIPOUT
 
 # Tool Chain
-echo -e "$green << cloning gcc from arter >> \n $white"
+echo -e "$green << cloning gcc >> \n $white"
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 "$PWDIR"/gcc64 > /dev/null 2>&1
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm "$PWDIR"/gcc32 > /dev/null 2>&1
 export PATH="$PWDIR/gcc64/bin:$PWDIR/gcc32/bin:$PATH"
