@@ -8,7 +8,7 @@ task:
   name: Build DoraCore Kernel
   timeout_in: 2h
   only_if: $CIRRUS_REPO_OWNER == 'DoraCore-Projects' && $CIRRUS_BRANCH == 'main'
-  skip: $CIRRUS_BRANCH != 'main'
+  skip: $CIRRUS_BRANCH != 'main' && $CIRRUS_TAG != ''
   container:
     image: dopaemon/doracore:latest
     cpu: 4
