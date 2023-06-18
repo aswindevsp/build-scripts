@@ -185,5 +185,5 @@ done
 create_release
 # Upload Release Assets
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
-    upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VARIAENT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
+    upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
 done
