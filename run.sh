@@ -10,7 +10,7 @@ export BUILD_TIME=$(date +"%Y%m%d-%H%M%S")
 export ARCH=arm64
 export SUBARCH=arm64
 export ZIPNAME=XYZABC
-export BUILD_VARIENTS=(OSS MIUI)
+export BUILD_VARIANTS=(OSS MIUI)
 
 export BUILD_TYPE=canary
 export PRERELEASE=true
@@ -171,18 +171,19 @@ tg_upload() {
         "${FILE_ARRAY[@]}"
 }
 
-for BUILD_VARIENT in ${BUILD_VARIENTS[@]}; do
+for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     git reset --hard ${commit_sha}
-    echo "Build Varient: ${BUILD_VAIRENT}"
+    echo "Build Variant: ${BUILD_VARIANT}"
     export ZIPNAME="DoraCore-${BUILD_VAIRENT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
-    if [ $BUILD_VARIENT == MIUI ]; then
+    if [ x$BUILD_VARIANT == xMIUI ]; then
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
     fi
+    start_build
 done
 
 # Create Release
 create_release
 # Upload Release Assets
-for BUILD_VARIENT in ${BUILD_VARIENTS[@]}; do
-    upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VAIRENT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
+for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
+    upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VARIAENT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
 done
