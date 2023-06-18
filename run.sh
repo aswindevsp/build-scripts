@@ -159,8 +159,14 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     start_build
 done
 
-# Create Release
-create_release
+if [[ -e $PWDIR/ZIPOUT/DoraCore-MIUI*zip && -e $PWDIR/ZIPOUT/DoraCore-OSS*zip ]]; then
+    # Create Release
+    create_release
+else
+    echo "Build Failed !!!"
+    exit 1
+fi
+
 # Upload Release Assets
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
