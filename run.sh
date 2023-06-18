@@ -23,7 +23,7 @@ fi
 
 # Clone kernel
 echo -e "$green << cloning kernel >> \n $white"
-git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git $KERNELDIR
+git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git $KERNELDIR > /dev/null 2>&1
 cd $KERNELDIR
 
 # Cleanup
@@ -46,14 +46,14 @@ mkdir -p $PWDIR/ZIPOUT
 
 # Tool Chain
 echo -e "$green << cloning gcc from arter >> \n $white"
-git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 "$PWDIR"/gcc64
-git clone --depth=1 https://github.com/mvaisakh/gcc-arm "$PWDIR"/gcc32
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 "$PWDIR"/gcc64 > /dev/null 2>&1
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm "$PWDIR"/gcc32 > /dev/null 2>&1
 export PATH="$PWDIR/gcc64/bin:$PWDIR/gcc32/bin:$PATH"
 export KBUILD_COMPILER_STRING=$("$PWDIR"/gcc64/bin/aarch64-elf-gcc --version | head -n 1)
 
 # Clang
 echo -e "$green << cloning clang >> \n $white"
-git clone -b 15 --depth=1 https://gitlab.com/PixelOS-Devices/playgroundtc.git "$PWDIR"/clang
+git clone -b 15 --depth=1 https://gitlab.com/PixelOS-Devices/playgroundtc.git "$PWDIR"/clang > /dev/null 2>&1
 export PATH="$PWDIR/clang/bin:$PATH"
 export KBUILD_COMPILER_STRING=$("$PWDIR"/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
