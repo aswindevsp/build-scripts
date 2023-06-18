@@ -169,7 +169,7 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     start_build
 done
 
-if [[ -e $PWDIR/ZIPOUT/DoraCore-MIUI*zip && -e $PWDIR/ZIPOUT/DoraCore-OSS*zip ]]; then
+if [ -f $PWDIR/ZIPOUT/DoraCore-MIUI-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip ] && [ -f $PWDIR/ZIPOUT/DoraCore-OSS-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip ]; then
     # Create Release
     create_release
 else
