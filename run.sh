@@ -105,8 +105,10 @@ start_build() {
 }
 
 generate_message() {
-    MSG=$(sed 's/$/\\n/g' $PWDIR/Infomation.md)
+    # MSG=$(sed 's/$/\\n/g' $PWDIR/Infomation.md)
     # MSG="$(sed 's/$/\\n/g' "$PWDIR/Infomation.md")"
+    sed -i 's/$/\\/g' ${PWDIR}/Infomation.md
+    MSG=$(sed 's/$/n/g' ${PWDIR}/Infomation.md)
 
 }
 
@@ -116,7 +118,7 @@ generate_release_data() {
 "tag_name":"${BUILD_TIME}",
 "target_commitish":"main",
 "name":"${ZIPNAME}",
-"body":"${MSG}",
+"body":"$MSG",
 "draft":false,
 "prerelease":${PRERELEASE},
 "generate_release_notes":false
