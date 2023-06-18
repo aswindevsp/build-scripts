@@ -152,7 +152,7 @@ upload_release_file() {
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     git reset --hard ${commit_sha}
     echo "Build Variant: ${BUILD_VARIANT}"
-    export ZIPNAME="DoraCore-${BUILD_VARIRANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
+    export ZIPNAME="DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
     if [ x$BUILD_VARIANT == xMIUI ]; then
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
     fi
