@@ -17,7 +17,7 @@ export PRERELEASE=true
 echo "Build Type: Canary"
 if [ x${1} == xstable ]; then
     export BUILD_TYPE=stable
-    export PPRERELEASE=false
+    export PRERELEASE=false
     echo "Build Type: Stable"
 fi
 
@@ -149,32 +149,10 @@ upload_release_file() {
     fi
 }
 
-tg_upload() {
-    TOKEN="$TG_TOKEN"
-    CHAT_ID="-1001980325626"
-    MESSAGE="DoraCore Canary ${date}"
-    DIRECTORY="$PWDIR/ZIPOUT"
-    # Đường dẫn đến thư mục chứa các file zip
-    FOLDER_PATH="$PWDIR/ZIPOUT"
-
-    # Tạo một mảng chứa các file zip
-    declare -a FILE_ARRAY
-
-    # Lặp qua tất cả các file zip trong thư mục và thêm vào mảng
-    for FILE_PATH in "$FOLDER_PATH"/*.zip; do
-        FILE_ARRAY+=("-F" "document=@\"$FILE_PATH\"")
-    done
-
-    # Gửi tin nhắn với cả 4 file đính kèm
-    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendDocument" \
-        -F chat_id="$CHAT_ID" \
-        "${FILE_ARRAY[@]}"
-}
-
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     git reset --hard ${commit_sha}
     echo "Build Variant: ${BUILD_VARIANT}"
-    export ZIPNAME="DoraCore-${BUILD_VAIRENT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
+    export ZIPNAME="DoraCore-${BUILD_VARIRANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
     if [ x$BUILD_VARIANT == xMIUI ]; then
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
     fi
