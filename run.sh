@@ -105,11 +105,7 @@ start_build() {
 }
 
 generate_message() {
-    # MSG=$(sed 's/$/\\n/g' $PWDIR/Infomation.md)
-    # MSG="$(sed 's/$/\\n/g' "$PWDIR/Infomation.md")"
-    sed -i 's/$/\\/g' ${PWDIR}/Infomation.md
-    MSG=$(sed 's/$/n/g' ${PWDIR}/Infomation.md)
-
+    MSG=$(sed 's/$/\\n/g' ${PWDIR}/Infomation.md | tr -d '\n')
 }
 
 generate_release_data() {
