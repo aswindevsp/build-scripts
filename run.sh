@@ -85,7 +85,7 @@ start_build() {
         CROSS_COMPILE=aarch64-linux-gnu- \
         CROSS_COMPILE_ARM32=arm-linux-gnueabi- 2>&1 | tee error.log
 
-    find out/arch/arm64/boot/dts/ -name '*.dtb' -exec cat {} + >out/arch/arm64/boot/dtb
+    find $KERNELDIR/out/arch/arm64/boot/dts/ -name '*.dtb' -exec cat {} + > $KERNELDIR/out/arch/arm64/boot/dtb
 
     # export IMGDTB=$KERNELDIR/out/arch/arm64/boot/Image.gz-dtb
     export IMG=$KERNELDIR/out/arch/arm64/boot/Image.gz
