@@ -5,7 +5,7 @@
 export PWDIR=$(pwd)
 export KERNELDIR=$PWDIR/13
 export ANYKERNELDIR=$PWDIR/Anykernel3
-export KERNEL_DEFCONFIG=vendor/sweet_user_defconfig
+export KERNEL_DEFCONFIG=sweet-perf_defconfig
 export BUILD_TIME=$(date +"%Y%m%d-%H%M%S")
 export ARCH=arm64
 export SUBARCH=arm64
@@ -84,19 +84,29 @@ start_build() {
         STRIP=llvm-strip \
         CROSS_COMPILE=aarch64-linux-gnu- \
         CROSS_COMPILE_ARM32=arm-linux-gnueabi- 2>&1 | tee error.log
-    export IMGDTB=$KERNELDIR/out/arch/arm64/boot/Image.gz-dtb
 
-    if [ -f $IMGDTB ]; then
+    find out/arch/arm64/boot/dts/ -name '*.dtb' -exec cat {} + >out/arch/arm64/boot/dtb
+
+    # export IMGDTB=$KERNELDIR/out/arch/arm64/boot/Image.gz-dtb
+    export IMG=$KERNELDIR/out/arch/arm64/boot/Image.gz
+    export DTBO=$KERNELDIR/out/arch/arm64/boot/dtbo.img
+    export DTB=$KERNELDIR/out/arch/arm64/boot/dtb
+
+    if [ -f $IMG ] && [ -f $DTBO ] && [ -f $DTB ]; then
         echo "------ Finishing Build ------"
         git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/Anykernel3.git $ANYKERNELDIR
-        cp $IMGDTB $ANYKERNELDIR
+        cp -r $IMG $ANYKERNELDIR/
+        cp -r $DTBO $ANYKERNELDIR/
+        cp -r $DTB $ANYKERNELDIR/
         cd $ANYKERNELDIR
+        sed -i "s/is_slot_device=0/is_slot_device=auto/g" anykernel.sh
         zip -r9 "$ZIPNAME" * -x '*.git*' README.md *placeholder
         cd -
         echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
         echo ""
         echo -e "$ZIPNAME is ready!"
         mv $ANYKERNELDIR/$ZIPNAME $PWDIR/ZIPOUT/
+        rm -rf $ANYKERNELDIR
         ls $PWDIR/ZIPOUT/
         echo ""
     else
