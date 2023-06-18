@@ -5,10 +5,11 @@ env:
     GH_TOKEN: "ENCRYPTED[!59def97ae0387ce36715d7586f10330b2896b7f6ccffb8c59002756eb85085465ddc8e18f7758e66108354160073391c!]"
 
 task:
-  name: Build DoraCore Kernel
+  name: Build DoraCore Canary Kernel
   timeout_in: 2h
   only_if: $CIRRUS_REPO_OWNER == 'DoraCore-Projects' && $CIRRUS_BRANCH == 'main'
-  skip: $CIRRUS_BRANCH != 'main' && $CIRRUS_TAG != ''
+  skip: $CIRRUS_BRANCH != 'main'
+  trigger_type: manual
   container:
     image: dopaemon/doracore:latest
     cpu: 4
@@ -17,7 +18,26 @@ task:
   setup_script:
     - sudo apt update && sudo apt install jq -y
 
-  build_script:
+  build_canary_script:
     - git config --global user.name "dopaemon"
     - git config --global user.email "polarisdp@gmail.com"
     - bash run.sh
+
+task:
+  name: Build DoraCore Stable Kernel
+  timeout_in: 2h
+  only_if: $CIRRUS_REPO_OWNER == 'DoraCore-Projects' && $CIRRUS_BRANCH == 'main'
+  skip: $CIRRUS_BRANCH != 'main'
+  trigger_type: manual
+  container:
+    image: dopaemon/doracore:latest
+    cpu: 4
+    memory: 6G
+
+  setup_script:
+    - sudo apt update && sudo apt install jq -y
+
+  build_canary_script:
+    - git config --global user.name "dopaemon"
+    - git config --global user.email "polarisdp@gmail.com"
+    - bash run.sh stable
