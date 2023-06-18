@@ -105,7 +105,9 @@ start_build() {
 }
 
 generate_message() {
-    MSG=$(sed 's/$/\\n/g' $PWDIR/Infomation.md)
+    # MSG=$(sed 's/$/\\n/g' $PWDIR/Infomation.md)
+    MSG="$(sed 's/$/\\n/g' "$PWDIR/Infomation.md")"
+
 }
 
 generate_release_data() {
