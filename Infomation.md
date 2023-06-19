@@ -1,4 +1,5 @@
 # DoraCore Kernel
+
 ## Kernel Infomation
 - **Linux:** 4.14.288
 - **Name:** Petit Gorille
@@ -13,10 +14,10 @@
 - **MIUI:** For MIUI, or rom base Miui or Miui vendor like OxygenOS Port.
 
 ## CodeAurora - CodeLinaro
-- **qcacld-3.0:**
-- **fw-api:**
-- **qca-wifi-host-cmn:**
-- **CAF:**
+- **qcacld-3.0:** LA.UM.9.1.r1-13500-SMxxx0.QSSI13.0
+- **fw-api:** LA.UM.9.1.r1-13500-SMxxx0.QSSI13.0
+- **qca-wifi-host-cmn:** LA.UM.9.1.r1-13500-SMxxx0.QSSI13.0
+- **CAF:** LA.UM.9.1.c11-55000-SMxxx0.QSSI13.0
 
 ## Code Contributors
 - [**dopaemon**](https://github.com/dopaemon)
