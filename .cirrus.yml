@@ -22,7 +22,7 @@ task:
     - git config --global user.name "dopaemon"
     - git config --global user.email "polarisdp@gmail.com"
     - git config --global credential.helper store
-    - wget -O Infomation.md https://raw.githubusercontent.com/DoraCore-Projects/.github/main/profile/README.md
+    - curl -s --output Infomation.md https://raw.githubusercontent.com/DoraCore-Projects/.github/main/profile/README.md
     - bash run.sh
 
 task:
@@ -43,5 +43,5 @@ task:
     - git config --global user.name "dopaemon"
     - git config --global user.email "polarisdp@gmail.com"
     - git config --global credential.helper store
-    - wget -O Infomation.md https://raw.githubusercontent.com/DoraCore-Projects/.github/main/profile/README.md
+    - curl -s --output Infomation.md https://raw.githubusercontent.com/DoraCore-Projects/.github/main/profile/README.md
     - bash run.sh stable
