@@ -1,5 +1,7 @@
 # DoraCore Kernel
 
+![Source Code](https://raw.githubusercontent.com/DoraCore-Projects/build-scripts/main/assests/background.jpg)
+
 ## Kernel Infomation
 - **Linux:** 4.14.288
 - **Name:** Petit Gorille
@@ -22,3 +24,18 @@
 ## Code Contributors
 - [**dopaemon**](https://github.com/dopaemon)
 - [**shekhawat2**](https://github.com/shekhawat2)
+
+## Donate
+- **Paypal:** [@KernelPanix](https://www.paypal.me/dopaemon)
+- **USDT (TRC20):**
+```Pay
+TYfNrngg74avxCoeraCD1zkgqD9BRyUuqY
+```
+- **USDT (BEP20):**
+```Pay
+0xEB23bdeDC895549EB563e8ca624a42eb6b5bCe51
+```
+- **USDT (ERC20):**
+```Pay
+0xEB23bdeDC895549EB563e8ca624a42eb6b5bCe51
+```
