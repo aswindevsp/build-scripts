@@ -35,7 +35,7 @@ git submodule init
 git submodule update
 git submodule update --recursive --remote
 git add -vAf
-git commit -sm "KernelSU: Latest commit"
+git commit -sm "Kernel: Latest commit, KernelSU and KProfiles"
 
 export commit_sha=$(git rev-parse HEAD)
 echo -e "Latest commit is: "${commit_sha}
