@@ -10,7 +10,6 @@ export BUILD_TIME=$(date +"%Y%m%d-%H%M%S")
 export ARCH=arm64
 export SUBARCH=arm64
 export ZIPNAME=XYZABC
-export BUILD_VARIANTS=(OSS MIUI)
 
 export BUILD_TYPE=canary
 export PRERELEASE=true
@@ -19,6 +18,14 @@ if [ x${1} == xstable ]; then
     export BUILD_TYPE=stable
     export PRERELEASE=false
     echo "Build Type: Stable"
+fi
+
+if [ x$BUILD_TYPE == xstable ]; then
+    export BUILD_VARIANTS=(OSS MIUI)
+fi
+
+if [ x$BUILD_TYPE == xcanary ]; then
+    export BUILD_VARIANTS=(OSS MIUI OSS-120HZ MIUI-120HZ)
 fi
 
 # Clone kernel
@@ -164,7 +171,17 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     echo "Build Variant: ${BUILD_VARIANT}"
     export ZIPNAME="DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
     if [ x$BUILD_VARIANT == xMIUI ]; then
+        git reset --hard ${commit_sha}
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
+    fi
+    if [ x$BUILD_VARIANT == xMIUI-120HZ ]; then
+        git reset --hard ${commit_sha}
+        git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
+        git cherry-pick 01e33e9a2272f387614b17c883aee1fc899072bc
+    fi
+    if [ x$BUILD_VARIANT == xOSS-120HZ ]; then
+        git reset --hard ${commit_sha}
+        git cherry-pick 01e33e9a2272f387614b17c883aee1fc899072bc
     fi
     start_build
 done
