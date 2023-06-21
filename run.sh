@@ -25,7 +25,7 @@ if [ x$BUILD_TYPE == xstable ]; then
 fi
 
 if [ x$BUILD_TYPE == xcanary ]; then
-    export BUILD_VARIANTS=(OSS MIUI OSS-120HZ MIUI-120HZ)
+    export BUILD_VARIANTS=(OSS MIUI OSS-135HZ MIUI-135HZ)
 fi
 
 # Clone kernel
@@ -174,12 +174,12 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
         git reset --hard ${commit_sha}
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
     fi
-    if [ x$BUILD_VARIANT == xMIUI-120HZ ]; then
+    if [ x$BUILD_VARIANT == xMIUI-135HZ ]; then
         git reset --hard ${commit_sha}
         git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
         git cherry-pick 01e33e9a2272f387614b17c883aee1fc899072bc
     fi
-    if [ x$BUILD_VARIANT == xOSS-120HZ ]; then
+    if [ x$BUILD_VARIANT == xOSS-135HZ ]; then
         git reset --hard ${commit_sha}
         git cherry-pick 01e33e9a2272f387614b17c883aee1fc899072bc
     fi
