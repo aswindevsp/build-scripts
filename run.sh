@@ -100,8 +100,10 @@ start_build() {
         OBJCOPY=llvm-objcopy \
         OBJDUMP=llvm-objdump \
         STRIP=llvm-strip \
-        CROSS_COMPILE=aarch64-linux-gnu- \
-        CROSS_COMPILE_ARM32=arm-linux-gnueabi- 2>&1 | tee error.log
+        CLANG_TRIPLE=aarch64-linux-gnu- \
+        CROSS_COMPILE="$PWDIR"/gcc64/bin/aarch64-linux-gnu- \
+	CROSS_COMPILE_ARM32="$PWDIR"/gcc32/bin/arm-linux-gnueabi- \
+        2>&1 | tee error.log
 
     find $KERNELDIR/out/arch/arm64/boot/dts/ -name '*.dtb' -exec cat {} + > $KERNELDIR/out/arch/arm64/boot/dtb
 
