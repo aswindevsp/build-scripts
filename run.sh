@@ -57,12 +57,16 @@ mkdir -p $PWDIR/ZIPOUT
 
 # Tool Chain
 echo -e "$green << cloning gcc >> \n $white"
-git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 "$PWDIR"/gcc64 > /dev/null 2>&1
-git clone --depth=1 https://github.com/mvaisakh/gcc-arm "$PWDIR"/gcc32 > /dev/null 2>&1
-export CROSS_COMPILE="$PWDIR"/gcc64/bin/aarch64-elf-
-export CROSS_COMPILE_ARM32="$PWDIR"/gcc32/bin/arm-eabi-
-# export PATH="$PWDIR/gcc64/bin:$PWDIR/gcc32/bin:$PATH"
-# export KBUILD_COMPILER_STRING=$("$PWDIR"/gcc64/bin/aarch64-elf-gcc --version | head -n 1)
+# git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 "$PWDIR"/gcc64 > /dev/null 2>&1
+# git clone --depth=1 https://github.com/mvaisakh/gcc-arm "$PWDIR"/gcc32 > /dev/null 2>&1
+git clone -b master --single-branch --depth=1 https://github.com/radcolor/aarch64-linux-gnu.git "$PWDIR"/gcc64 > /dev/null 2>&1
+git clone -b master --single-branch --depth=1 https://github.com/radcolor/arm-linux-gnueabi.git"$PWDIR"/gcc32 > /dev/null 2>&1
+# export CROSS_COMPILE="$PWDIR"/gcc64/bin/aarch64-elf-
+# export CROSS_COMPILE_ARM32="$PWDIR"/gcc32/bin/arm-eabi-
+export CROSS_COMPILE="$PWDIR"/gcc64/bin/aarch64-linux-gnu-
+export CROSS_COMPILE_ARM32="$PWDIR"/gcc32/bin/arm-linux-gnueabi-
+export PATH="$PWDIR/gcc64/bin:$PWDIR/gcc32/bin:$PATH"
+export KBUILD_COMPILER_STRING=$("$PWDIR"/gcc64/bin/aarch64-linux-gnu-gcc --version | head -n 1)
 
 # Clang
 echo -e "$green << cloning clang >> \n $white"
