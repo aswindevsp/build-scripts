@@ -185,7 +185,7 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     export ZIPNAME="DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip"
     if [ x$BUILD_VARIANT == xMIUI ]; then
         git reset --hard ${commit_sha}
-        git cherry-pick 18e95730e4e2cc796674f888dfbced069b69895c
+        git cherry-pick 370deacbaec3961195d0a9e9a7950e546f075766
     fi
 #    if [ x$BUILD_VARIANT == xMIUI-135HZ ]; then
 #        git reset --hard ${commit_sha}
