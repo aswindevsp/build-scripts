@@ -216,5 +216,5 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
 done
 
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
-    upload_release_file $KERNELDIR/Prebuilt-${BUILD_VARIANT}.zip
+    upload_release_file $PWDIR/ZIPOUT/Prebuilt-${BUILD_VARIANT}.zip
 done
