@@ -33,8 +33,9 @@ fi
 echo -e "$green << cloning kernel >> \n $white"
 git clone -j$(nproc --all) \
           --single-branch \
-          -b android \
-          https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git $KERNELDIR > /dev/null 2>&1
+          -b android-4.14.288 \
+          https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git \
+          $KERNELDIR > /dev/null 2>&1
 cd $KERNELDIR
 
 # Cleanup
@@ -115,6 +116,7 @@ start_build() {
     if [ -f $IMG ] && [ -f $DTBO ] && [ -f $DTB ]; then
         echo "------ Finishing Build ------"
         git clone https://${GH_TOKEN}@github.com/DoraCore-Projects/Anykernel3.git $ANYKERNELDIR
+        zip -rv9 $KERNELDIR/Prebuilt-${BUILD_VARIANT}.zip $KERNELDIR/out/arch/arm64/boot
         cp -r $IMG $ANYKERNELDIR/
         cp -r $DTBO $ANYKERNELDIR/
         cp -r $DTB $ANYKERNELDIR/
@@ -126,6 +128,7 @@ start_build() {
         echo ""
         echo -e "$ZIPNAME is ready!"
         mv $ANYKERNELDIR/$ZIPNAME $PWDIR/ZIPOUT/
+        mv $KERNELDIR/Prebuilt-${BUILD_VARIANT}.zip $PWDIR/ZIPOUT/
         rm -rf $ANYKERNELDIR
         ls $PWDIR/ZIPOUT/
         echo ""
@@ -210,4 +213,8 @@ fi
 # Upload Release Assets
 for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     upload_release_file $PWDIR/ZIPOUT/DoraCore-${BUILD_VARIANT}-${BUILD_TYPE}-sweet-${BUILD_TIME}.zip
+done
+
+for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
+    upload_release_file $KERNELDIR/Prebuilt-${BUILD_VARIANT}.zip
 done
