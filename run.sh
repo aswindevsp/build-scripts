@@ -5,7 +5,7 @@
 export PWDIR=$(pwd)
 export KERNELDIR=$PWDIR/13
 export ANYKERNELDIR=$PWDIR/Anykernel3
-export KERNEL_DEFCONFIG=vendor/sweet_user_defconfig
+export KERNEL_DEFCONFIG=vendor/sweet-perf_defconfig
 export BUILD_TIME=$(date +"%Y%m%d-%H%M%S")
 export ARCH=arm64
 export SUBARCH=arm64
