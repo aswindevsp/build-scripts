@@ -21,7 +21,7 @@ if [ x${1} == xstable ]; then
 fi
 
 if [ x$BUILD_TYPE == xstable ]; then
-    export BUILD_VARIANTS=(OSS MIUI)
+    export BUILD_VARIANTS=(OSS MIUI OSS-KSU MIUI-KSU)
 fi
 
 if [ x$BUILD_TYPE == xcanary ]; then
@@ -189,6 +189,15 @@ for BUILD_VARIANT in ${BUILD_VARIANTS[@]}; do
     if [ x$BUILD_VARIANT == xMIUI ]; then
         git reset --hard ${commit_sha}
         git cherry-pick 370deacbaec3961195d0a9e9a7950e546f075766
+    fi
+    if [ x$BUILD_VARIANT == xOSS-KSU ]; then
+        git cherry-pick 7cc9c8e01acf680d1a7f83c90e1eabdf5a11e6fb
+    fi
+    if [ x$BUILD_VARIANT == xMIUI-KSU ]; then
+        git cherry-pick 7cc9c8e01acf680d1a7f83c90e1eabdf5a11e6fb
+    fi
+    if [ x$BUILD_TYPE == xcanary ]; then
+        git cherry-pick 7cc9c8e01acf680d1a7f83c90e1eabdf5a11e6fb
     fi
 #    if [ x$BUILD_VARIANT == xMIUI-135HZ ]; then
 #        git reset --hard ${commit_sha}
