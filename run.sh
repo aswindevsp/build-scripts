@@ -34,7 +34,7 @@ echo -e "$green << cloning kernel >> \n $white"
 git clone -j$(nproc --all) \
           --single-branch \
           -b android \
-          https://${GH_TOKEN}@github.com/DoraCore-Projects/android_kernel_xiaomi_sweet.git \
+          https://github.com/aswindevsp/kernel_xiaomi_sweet.git \
           $KERNELDIR > /dev/null 2>&1
 cd $KERNELDIR
 
